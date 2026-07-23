@@ -46,7 +46,7 @@ export const menu = [
     id: 5,
     name: "CF Hazelnut Jelly",
     category: "coffee",
-    image: "/images/coffee/hazelnut-jelly.jpg",
+    image: "/images/coffee/hzn.png",
     sizes: {
       M: 40000,
       L: 44000,
@@ -56,7 +56,7 @@ export const menu = [
     id: 6,
     name: "CF Caramel Macchiato",
     category: "coffee",
-    image: "/images/coffee/caramelmacchiato.jpg",
+    image: "/images/coffee/cm.png",
     sizes: {
       M: 43000,
       L: 47000,
@@ -66,7 +66,7 @@ export const menu = [
     id: 7,
     name: "Cà Phê Dừa Creamy",
     category: "coffee",
-    image: "/images/coffee/duacreamy.jpg",
+    image: "/images/coffee/dcreamy.png",
     sizes: {
       M: 43000,
       L: 47000,
@@ -110,7 +110,7 @@ export const menu = [
     id: 11,
     name: "Latte",
     category: "coffee",
-    image: "/images/coffee/latte.jpg",
+    image: "/images/coffee/latte.png",
     sizes: {
       M: 37000,
       L: 43000,
@@ -178,14 +178,14 @@ export const menu = [
     id: 18,
     name: "Matcha Đá Xay",
     category: "coffee",
-    image: "/images/special/matcha.jpg",
+    image: "/images/special/matcha.png",
     price: 48000,
   },
   {
     id: 19,
     name: "Chanh Tuyết Hoa Hồng",
     category: "tea",
-    image: "/images/special/chanhtuyet.jpg",
+    image: "/images/special/ct.png",
     price: 43000,
   },
   {
@@ -304,7 +304,7 @@ export const menu = [
     id: 31,
     name: "Trà Sữa Truyền Thống",
     category: "milktea",
-    image: "/images/milktea/traditional.jpg",
+    image: "/images/milktea/ts.jpg",
     sizes: {
       M: 37000,
       L: 42000,
@@ -314,7 +314,7 @@ export const menu = [
     id: 32,
     name: "Trà Sữa Lài",
     category: "milktea",
-    image: "/images/milktea/jasmine.jpg",
+    image: "/images/milktea/lai.png",
     sizes: {
       M: 37000,
       L: 42000,
@@ -324,7 +324,7 @@ export const menu = [
     id: 33,
     name: "Trà Sữa Oolong",
     category: "milktea",
-    image: "/images/milktea/olong.jpg",
+    image: "/images/milktea/olong.png",
     sizes: {
       M: 37000,
       L: 42000,
@@ -334,7 +334,7 @@ export const menu = [
     id: 34,
     name: "Trà Sữa Signature",
     category: "milktea",
-    image: "/images/milktea/signature.jpg",
+    image: "/images/milktea/olong.png",
     sizes: {
       M: 40000,
       L: 45000,
@@ -358,7 +358,7 @@ export const menu = [
     id: 36,
     name: "Matcha Sữa Dừa",
     category: "special",
-    image: "/images/special/matchadua.jpg",
+    image: "/images/special/matchadua.png",
     sizes: {
       M: 40000,
       L: 46000,
@@ -368,7 +368,7 @@ export const menu = [
     id: 37,
     name: "Sương Mai Giải Nhiệt",
     category: "special",
-    image: "/images/special/suongmai.jpg",
+    image: "/images/tea/sm.png",
     sizes: {
       M: 28000,
       L: 34000,
@@ -378,7 +378,7 @@ export const menu = [
     id: 38,
     name: "Ca Cao Muối",
     category: "special",
-    image: "/images/special/cacao-muoi.jpg",
+    image: "/images/special/cc.png",
     sizes: {
       M: 37000,
       L: 43000,
