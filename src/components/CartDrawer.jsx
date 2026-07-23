@@ -165,91 +165,84 @@ export default function CartDrawer({ open, onClose }) {
           )}
 
           {cart.map((item, idx) => (
-            <div
-              key={item.id}
-              className="border-dashed py-4"
-              style={{
-                borderColor: RULE,
-                borderBottomWidth: idx === cart.length - 1 ? 0 : 1,
-              }}
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3
-                    className="truncate text-[15px] font-bold uppercase tracking-wide"
-                    style={{
-                      color: INK,
-                      fontFamily: "'Space Grotesk', sans-serif",
-                    }}
-                  >
-                    {item.name}
-                  </h3>
-                  <p
-                    className="mt-0.5 text-xs font-medium"
-                    style={{ color: SAGE }}
-                  >
-                    Size {item.size}
-                  </p>
-                  {item.note && (
-                    <p
-                      className="mt-1 truncate text-xs italic"
-                      style={{ color: `${INK}66` }}
-                    >
-                      📝 {item.note}
-                    </p>
-                  )}
-                </div>
+  <div
+    key={item.id}
+    className="border-dashed py-4"
+    style={{
+      borderColor: RULE,
+      borderBottomWidth: idx === cart.length - 1 ? 0 : 1,
+    }}
+  >
+    <div className="flex items-start justify-between gap-3">
+      <div className="flex items-center gap-2 min-w-0">
+        <h3
+          className="truncate text-sm font-bold"
+          style={{
+            color: INK,
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}
+        >
+          {item.name}
+        </h3>
 
-                <button
-                  onClick={() => removeItem(item.id)}
-                  className="shrink-0 rounded-full px-2 py-1.5 text-[11px] font-bold uppercase tracking-wider transition active:opacity-60 sm:hover:opacity-70"
-                  style={{ color: CHILI }}
-                >
-                  Xóa
-                </button>
-              </div>
+        <span
+          className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold"
+          style={{
+            background: `${SAGE}18`,
+            color: SAGE,
+          }}
+        >
+          {item.size}
+        </span>
+      </div>
 
-              <div className="mt-3 flex items-center justify-between">
-                <div
-                  className="flex items-center rounded-full border"
-                  style={{ borderColor: `${INK}26` }}
-                >
-                  <button
-                    onClick={() => decrease(item.id)}
-                    aria-label="Giảm số lượng"
-                    className="flex h-10 w-10 items-center justify-center text-base transition active:bg-black/5 sm:h-9 sm:w-9 sm:hover:bg-black/5"
-                    style={{ color: INK }}
-                  >
-                    −
-                  </button>
-                  <span
-                    className="w-8 text-center text-sm font-bold tabular-nums"
-                    style={{
-                      color: INK,
-                      fontFamily: "'Space Mono', monospace",
-                    }}
-                  >
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => increase(item.id)}
-                    aria-label="Tăng số lượng"
-                    className="flex h-10 w-10 items-center justify-center text-base transition active:bg-black/5 sm:h-9 sm:w-9 sm:hover:bg-black/5"
-                    style={{ color: INK }}
-                  >
-                    +
-                  </button>
-                </div>
+      <span
+        className="shrink-0 text-base font-bold tabular-nums"
+        style={{
+          color: INK,
+          fontFamily: "'Space Mono', monospace",
+        }}
+      >
+        {formatPrice(item.total)}
+      </span>
+    </div>
 
-                <span
-                  className="text-base font-bold tabular-nums"
-                  style={{ color: INK, fontFamily: "'Space Mono', monospace" }}
-                >
-                  {formatPrice(item.total)}
-                </span>
-              </div>
-            </div>
-          ))}
+    <div className="mt-3">
+      <div
+        className="inline-flex items-center rounded-full border"
+        style={{ borderColor: `${INK}26` }}
+      >
+        <button
+          onClick={() => decrease(item.id)}
+          aria-label="Giảm số lượng"
+          className="flex h-8 w-8 items-center justify-center text-base transition active:bg-black/5 hover:bg-black/5"
+          style={{ color: INK }}
+        >
+          −
+        </button>
+
+        <span
+          className="w-8 text-center text-sm font-bold tabular-nums"
+          style={{
+            color: INK,
+            fontFamily: "'Space Mono', monospace",
+          }}
+        >
+          {item.quantity}
+        </span>
+
+        <button
+          onClick={() => increase(item.id)}
+          aria-label="Tăng số lượng"
+          className="flex h-8 w-8 items-center justify-center text-base transition active:bg-black/5 hover:bg-black/5"
+          style={{ color: INK }}
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+))}
         </div>
 
         {/* Footer */}
@@ -265,25 +258,23 @@ export default function CartDrawer({ open, onClose }) {
           >
             <fieldset>
               <legend
-                className="mb-3 block text-xs font-bold uppercase tracking-[0.18em]"
+                className="mb-2 block text-[11px] font-bold uppercase tracking-[0.16em]"
                 style={{ color: `${INK}99` }}
               >
                 Chọn phương thức thanh toán
               </legend>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 {[
                   {
                     value: "CASH",
                     title: "Tiền mặt",
-                    subtitle: "Thanh toán khi nhận",
-                    icon: "💵",
+                    subtitle: "Thanh toán",
                   },
                   {
                     value: "BANK_TRANSFER",
                     title: "Chuyển khoản",
                     subtitle: "QR / Banking",
-                    icon: "🏦",
                   },
                 ].map((method) => {
                   const active = paymentMethod === method.value;
@@ -293,31 +284,30 @@ export default function CartDrawer({ open, onClose }) {
                       key={method.value}
                       type="button"
                       onClick={() => setPaymentMethod(method.value)}
-                      className="relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-200 active:scale-[0.98]"
+                      className="relative rounded-xl border px-3 py-2.5 text-left transition-all duration-200 active:scale-95"
                       style={{
                         borderColor: active ? CHILI : RULE,
                         background: active
                           ? "linear-gradient(135deg,#FFF6F3,#FFE5DE)"
                           : "#fff",
                         boxShadow: active
-                          ? "0 10px 24px rgba(214,71,43,.12)"
-                          : "0 2px 8px rgba(0,0,0,.04)",
+                          ? "0 6px 16px rgba(214,71,43,.12)"
+                          : "0 2px 6px rgba(0,0,0,.04)",
                       }}
                     >
-                      {/* check */}
                       {active && (
                         <div
-                          className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
+                          className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full text-[10px] text-white"
                           style={{ background: CHILI }}
                         >
                           ✓
                         </div>
                       )}
 
-                      <div className="text-lg">{method.icon}</div>
+                      <div className="text-base">{method.icon}</div>
 
                       <div
-                        className="mt-3 font-bold"
+                        className="mt-1 text-sm font-bold"
                         style={{
                           color: active ? CHILI : INK,
                           fontFamily: "'Space Grotesk', sans-serif",
@@ -327,7 +317,7 @@ export default function CartDrawer({ open, onClose }) {
                       </div>
 
                       <div
-                        className="mt-1 text-xs"
+                        className="text-[10px]"
                         style={{ color: `${INK}88` }}
                       >
                         {method.subtitle}
@@ -339,7 +329,7 @@ export default function CartDrawer({ open, onClose }) {
             </fieldset>
 
             <label
-              className="mb-1.5 mt-4 block text-xs font-bold uppercase tracking-wider"
+              className="mb-1.5 mt-4 block text-[11px] font-bold uppercase tracking-wider"
               style={{ color: `${INK}99` }}
             >
               Ghi chú cho quán
@@ -363,7 +353,7 @@ export default function CartDrawer({ open, onClose }) {
 
           <div className="flex items-center justify-between py-3">
             <span
-              className="text-sm font-bold uppercase tracking-widest"
+              className="text-xs font-bold uppercase tracking-widest"
               style={{ color: INK }}
             >
               Tổng cộng:
@@ -383,11 +373,11 @@ export default function CartDrawer({ open, onClose }) {
           )}
 
           {/* Ticket-stub button: circular notches punched at both ends */}
-          <div className="relative mt-4">
+          <div className="relative">
             <button
               onClick={createOrder}
               disabled={cart.length === 0 || isSubmitting}
-              className="w-full rounded-xl py-4 text-base font-bold uppercase tracking-widest text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+              className="w-full rounded-xl py-3 text-base font-bold uppercase tracking-widest text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
               style={{
                 background: CHILI,
                 fontFamily: "'Space Grotesk', sans-serif",
