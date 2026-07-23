@@ -11,16 +11,6 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F6F2] text-stone-800">
-      {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-black/5 bg-[#FEC401] backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-center px-4">
-          <img
-            src="/images/logo.png"
-            alt="OB Cafe"
-            className="h-28 sm:h-16"
-          />
-        </div>
-      </header>
 
       {/* Menu */}
       <main className="mx-auto max-w-7xl px-3 py-4 pb-28 sm:px-5 lg:px-6">

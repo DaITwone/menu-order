@@ -18,7 +18,7 @@ export default function ProductCard({ product, onAdd }) {
       "
     >
       {/* Image */}
-      <div className="aspect-square overflow-hidden bg-gradient-to-br from-[#FAFAFA] to-[#F2F2F2] p-4">
+      <div className="aspect-square overflow-hidden p-4">
         <img
           src={product.image}
           alt={product.name}
