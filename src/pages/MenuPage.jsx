@@ -8,18 +8,23 @@ import CartDrawer from "../components/CartDrawer";
 export default function MenuPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="sticky top-0 bg-[#F8C810] shadow">
-        <img
-          src="/images/logo.png"
-          alt="OB Cafe"
-          className="h-32 w-full object-contain"
-        />
+    <div className="min-h-screen bg-[#F7F6F2] text-stone-800">
+      {/* Header */}
+      <header className="sticky top-0 z-30 border-b border-black/5 bg-[#FEC401] backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-center px-4">
+          <img
+            src="/images/logo.png"
+            alt="OB Cafe"
+            className="h-28 sm:h-16"
+          />
+        </div>
       </header>
 
-      <div className="mx-auto max-w-7xl p-4">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* Menu */}
+      <main className="mx-auto max-w-7xl px-3 py-4 pb-28 sm:px-5 lg:px-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {menu.map((item) => (
             <ProductCard
               key={item.id}
@@ -28,16 +33,20 @@ export default function MenuPage() {
             />
           ))}
         </div>
-      </div>
+      </main>
 
       <ProductModal
         open={!!selectedProduct}
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
+
       <FloatingCartButton onClick={() => setCartOpen(true)} />
 
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartDrawer
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+      />
     </div>
   );
 }

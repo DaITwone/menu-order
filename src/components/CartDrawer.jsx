@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import { formatPrice } from "../utils/currency";
+import { useNavigate } from "react-router-dom";
 
 // Design language: an order slip / receipt torn fresh off the printer.
 // Paper cream, ink charcoal, chili-red for action, mustard for the count stamp.
@@ -12,8 +13,13 @@ const SAGE = "#7C8863";
 const RULE = "#DED2BE";
 
 export default function CartDrawer({ open, onClose }) {
-  const { cart, totalPrice, increase, decrease, removeItem } = useCart();
+  const { cart, totalPrice, increase, decrease, removeItem, clearCart } =
+    useCart();
+  const navigate = useNavigate();
   const [orderNote, setOrderNote] = useState("");
+  const [orderCode] = useState(
+    () => `#${String(Date.now()).slice(-6)}`,
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -26,7 +32,30 @@ export default function CartDrawer({ open, onClose }) {
 
   if (!open) return null;
 
-  const orderCode = `#${String(Date.now()).slice(-6)}`;
+  const createOrder = () => {
+    if (cart.length === 0) return;
+
+    const order = {
+      id: Date.now(),
+      code: `HD${Date.now()}`,
+      createdAt: new Date().toLocaleString("vi-VN"),
+      note: orderNote,
+      items: cart,
+      total: totalPrice,
+    };
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders.unshift(order);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    clearCart();
+
+    onClose();
+
+    navigate("/orders");
+  };
 
   return (
     <div
@@ -37,7 +66,7 @@ export default function CartDrawer({ open, onClose }) {
         className="
     relative
     flex
-    h-[100dvh]
+    h-dvh
     w-full
     flex-col
     overflow-hidden
@@ -245,7 +274,7 @@ export default function CartDrawer({ open, onClose }) {
           {/* Barcode flourish — purely decorative, sells the "order slip" idea */}
           <div className="mt-3 flex flex-col items-center gap-1">
             <div
-              className="h-6 w-full max-w-[220px]"
+              className="h-6 w-full max-w-55"
               style={{
                 backgroundImage:
                   "repeating-linear-gradient(90deg, currentColor 0px, currentColor 2px, transparent 2px, transparent 4px, currentColor 4px, currentColor 5px, transparent 5px, transparent 9px, currentColor 9px, currentColor 12px, transparent 12px, transparent 14px)",
@@ -267,6 +296,7 @@ export default function CartDrawer({ open, onClose }) {
           {/* Ticket-stub button: circular notches punched at both ends */}
           <div className="relative mt-4">
             <button
+              onClick={createOrder}
               disabled={cart.length === 0}
               className="w-full rounded-xl py-4 text-base font-bold uppercase tracking-widest text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
               style={{
@@ -277,11 +307,11 @@ export default function CartDrawer({ open, onClose }) {
               Tạo đơn
             </button>
             <span
-              className="absolute left-[-9px] top-1/2 h-[18px] w-[18px] -translate-y-1/2 rounded-full"
+              className="absolute -left-2.25 top-1/2 h-4.5 w-4.5 -translate-y-1/2 rounded-full"
               style={{ background: PAPER }}
             />
             <span
-              className="absolute right-[-9px] top-1/2 h-[18px] w-[18px] -translate-y-1/2 rounded-full"
+              className="absolute -right-2.25 top-1/2 h-4.5 w-4.5 -translate-y-1/2 rounded-full"
               style={{ background: PAPER }}
             />
           </div>

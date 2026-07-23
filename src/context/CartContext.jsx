@@ -66,6 +66,7 @@ export function CartProvider({ children }) {
         clearCart,
         totalItems,
         totalPrice,
+        
       }}
     >
       {children}
