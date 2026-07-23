@@ -290,7 +290,7 @@ export const menu = [
     id: 30,
     name: "Trà Lựu Nha Đam",
     category: "tea",
-    image: "/images/tea/luu-nhadam.jpg",
+    image: "/images/tea/l.png",
     sizes: {
       M: 38000,
       L: 43000,
