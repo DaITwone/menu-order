@@ -17,10 +17,6 @@ export default function CartDrawer({ open, onClose }) {
     useCart();
   const navigate = useNavigate();
   const [orderNote, setOrderNote] = useState("");
-  const [orderCode] = useState(
-    () => `#${String(Date.now()).slice(-6)}`,
-  );
-
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
@@ -255,7 +251,6 @@ export default function CartDrawer({ open, onClose }) {
 
           <div
             className="mt-4 flex items-center justify-between py-3"
-            style={{ borderTop: `3px double ${INK}` }}
           >
             <span
               className="text-sm font-bold uppercase tracking-widest"
@@ -268,28 +263,6 @@ export default function CartDrawer({ open, onClose }) {
               style={{ color: INK, fontFamily: "'Space Mono', monospace" }}
             >
               {formatPrice(totalPrice)}
-            </span>
-          </div>
-
-          {/* Barcode flourish — purely decorative, sells the "order slip" idea */}
-          <div className="mt-3 flex flex-col items-center gap-1">
-            <div
-              className="h-6 w-full max-w-55"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(90deg, currentColor 0px, currentColor 2px, transparent 2px, transparent 4px, currentColor 4px, currentColor 5px, transparent 5px, transparent 9px, currentColor 9px, currentColor 12px, transparent 12px, transparent 14px)",
-                color: INK,
-                opacity: 0.75,
-              }}
-            />
-            <span
-              className="text-[10px] tracking-[0.3em]"
-              style={{
-                color: `${INK}66`,
-                fontFamily: "'Space Mono', monospace",
-              }}
-            >
-              {orderCode}
             </span>
           </div>
 

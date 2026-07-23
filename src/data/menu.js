@@ -184,7 +184,7 @@ export const menu = [
   {
     id: 19,
     name: "Chanh Tuyết Hoa Hồng",
-    category: "coffee",
+    category: "tea",
     image: "/images/special/chanhtuyet.jpg",
     price: 43000,
   },
@@ -210,7 +210,7 @@ export const menu = [
     id: 22,
     name: "Trà Oolong Sen Vàng Như Ý",
     category: "tea",
-    image: "/images/tea/oolong-senvang.jpg",
+    image: "/images/tea/olong.jpg",
     sizes: {
       M: 41000,
       L: 46000,

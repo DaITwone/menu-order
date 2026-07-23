@@ -165,37 +165,13 @@ export default function OrdersPage() {
                     {/* Note */}
                     {order.note && (
                       <div
-                        className="mt-4 rounded-xl border border-dashed p-3 text-sm"
+                        className=" rounded-xl border border-dashed p-3 text-sm"
                         style={{ borderColor: RULE, color: `${INK}CC` }}
                       >
-                        <span
-                          className="mb-1 block text-[11px] font-bold uppercase tracking-wider"
-                          style={{ color: `${INK}99` }}
-                        >
-                          📝 Ghi chú
-                        </span>
                         {order.note}
                       </div>
                     )}
 
-                    {/* Total */}
-                    <div
-                      className="mt-4 flex items-center justify-between py-3"
-                      style={{ borderTop: `3px double ${INK}` }}
-                    >
-                      <span
-                        className="text-sm font-bold uppercase tracking-widest"
-                        style={{ color: INK }}
-                      >
-                        Tổng cộng
-                      </span>
-                      <span
-                        className="text-xl font-bold tabular-nums"
-                        style={{ color: INK, fontFamily: "'Space Mono', monospace" }}
-                      >
-                        {formatPrice(order.total)}
-                      </span>
-                    </div>
 
                     {/* Delete action — single control, min 44px touch target.
                         Tapping swaps into an inline confirm row instead of a
