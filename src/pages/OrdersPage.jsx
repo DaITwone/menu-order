@@ -68,9 +68,12 @@ export default function OrdersPage() {
 
   const confirmDelete = async (orderId) => {
     try {
-      const response = await fetch(`/api/orders?id=${encodeURIComponent(orderId)}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `/api/orders?id=${encodeURIComponent(orderId)}`,
+        {
+          method: "DELETE",
+        },
+      );
       if (!response.ok) throw new Error("Không thể xóa hóa đơn.");
       setOrders((current) => current.filter((order) => order.id !== orderId));
       setConfirmingId(null);
@@ -107,7 +110,10 @@ export default function OrdersPage() {
 
       <div className="mx-auto max-w-3xl px-4 py-6 sm:py-10">
         {isLoading ? (
-          <div className="py-16 text-center text-sm" style={{ color: `${INK}99` }}>
+          <div
+            className="py-16 text-center text-sm"
+            style={{ color: `${INK}99` }}
+          >
             Đang tải hóa đơn...
           </div>
         ) : loadError ? (
@@ -142,41 +148,46 @@ export default function OrdersPage() {
                       <div>
                         <h2
                           className="text-lg font-bold uppercase tracking-wide"
-                          style={{ color: INK, fontFamily: "'Space Grotesk', sans-serif" }}
+                          style={{
+                            color: INK,
+                            fontFamily: "'Space Grotesk', sans-serif",
+                          }}
                         >
                           {order.code}
                         </h2>
                         <p
                           className="mt-0.5 text-xs"
-                          style={{ color: SAGE, fontFamily: "'Space Mono', monospace" }}
+                          style={{
+                            color: SAGE,
+                            fontFamily: "'Space Mono', monospace",
+                          }}
                         >
                           {order.createdAt}
                         </p>
                       </div>
-                      <span
-                        className="flex h-7 shrink-0 -rotate-3 items-center rounded-full px-2.5 text-[11px] font-bold uppercase tracking-wider"
-                        style={{ background: MUSTARD, color: INK }}
+                      <button
+                        onClick={() =>
+                          isConfirming
+                            ? cancelDelete()
+                            : requestDelete(order.id)
+                        }
+                        className="flex h-7 shrink-0 -rotate-3 items-center rounded-full px-2.5 text-[11px] font-bold uppercase tracking-wider transition hover:scale-105 active:scale-95"
+                        style={{
+                          background: isConfirming ? CHILI : MUSTARD,
+                          color: isConfirming ? "#fff" : INK,
+                        }}
                       >
-                        Đã đặt
-                      </span>
+                        {isConfirming
+                          ? "XÓA?"
+                          : PAYMENT_METHOD_LABELS[order.paymentMethod] ||
+                            "Tiền mặt"}
+                      </button>
                     </div>
 
                     <div
                       className="mt-4 border-t border-dashed"
                       style={{ borderColor: RULE }}
                     />
-
-                    <div className="flex items-center justify-between py-3 text-xs">
-                      <span
-                        className="font-bold uppercase tracking-wider"
-                        style={{ color: `${INK}99` }}
-                      >
-                        Thanh toán
-                      </span>
-                      <span className="font-bold" style={{ color: INK }}>
-                        {PAYMENT_METHOD_LABELS[order.paymentMethod] || "Tiền mặt"}
-                      </span>
-                    </div>
 
                     {/* Items */}
                     <div>
@@ -193,7 +204,10 @@ export default function OrdersPage() {
                           <div className="min-w-0">
                             <span
                               className="text-sm font-bold uppercase tracking-wide"
-                              style={{ color: INK, fontFamily: "'Space Grotesk', sans-serif" }}
+                              style={{
+                                color: INK,
+                                fontFamily: "'Space Grotesk', sans-serif",
+                              }}
                             >
                               {item.name}
                             </span>
@@ -206,7 +220,10 @@ export default function OrdersPage() {
                           </div>
                           <div
                             className="shrink-0 text-sm font-bold tabular-nums"
-                            style={{ color: INK, fontFamily: "'Space Mono', monospace" }}
+                            style={{
+                              color: INK,
+                              fontFamily: "'Space Mono', monospace",
+                            }}
                           >
                             {formatPrice(item.total)}
                           </div>
@@ -223,7 +240,6 @@ export default function OrdersPage() {
                         {order.note}
                       </div>
                     )}
-
 
                     {/* Delete action — single control, min 44px touch target.
                         Tapping swaps into an inline confirm row instead of a
@@ -257,14 +273,7 @@ export default function OrdersPage() {
                             Xác nhận
                           </button>
                         </div>
-                      ) : (
-                        <button
-                          onClick={() => requestDelete(order.id)}
-                          className="flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition active:opacity-60 sm:hover:opacity-70"
-                          style={{ color: CHILI }}
-                        >
-                          Xóa đơn này
-                        </button>
+                      ) : (<></>
                       )}
                     </div>
                   </div>
