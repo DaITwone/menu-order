@@ -1,10 +1,15 @@
 import { prisma } from "../lib/prisma.js";
 
+const VIETNAM_TIME_ZONE = "Asia/Ho_Chi_Minh";
+
 function toOrder(invoice) {
   return {
     id: invoice.id,
     code: invoice.code,
-    createdAt: invoice.createdAt.toLocaleString("vi-VN"),
+    createdAt: invoice.createdAt.toLocaleString("vi-VN", {
+      timeZone: VIETNAM_TIME_ZONE,
+      hour12: false,
+    }),
     note: invoice.note,
     items: invoice.items,
     total: invoice.total,

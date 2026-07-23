@@ -314,7 +314,7 @@ export default function CartDrawer({ open, onClose }) {
                         </div>
                       )}
 
-                      <div className="text-3xl">{method.icon}</div>
+                      <div className="text-lg">{method.icon}</div>
 
                       <div
                         className="mt-3 font-bold"
@@ -361,7 +361,7 @@ export default function CartDrawer({ open, onClose }) {
             />
           </div>
 
-          <div className="mt-4 flex items-center justify-between py-3">
+          <div className="flex items-center justify-between py-3">
             <span
               className="text-sm font-bold uppercase tracking-widest"
               style={{ color: INK }}

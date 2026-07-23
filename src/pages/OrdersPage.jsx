@@ -263,7 +263,7 @@ export default function OrdersPage() {
                           className="flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition active:opacity-60 sm:hover:opacity-70"
                           style={{ color: CHILI }}
                         >
-                          🗑 Xóa đơn này
+                          Xóa đơn này
                         </button>
                       )}
                     </div>
