@@ -17,6 +17,7 @@ export default function CartDrawer({ open, onClose }) {
     useCart();
   const navigate = useNavigate();
   const [orderNote, setOrderNote] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("CASH");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function CartDrawer({ open, onClose }) {
           note: orderNote,
           items: cart,
           total: totalPrice,
+          paymentMethod,
         }),
       });
 
@@ -59,6 +61,7 @@ export default function CartDrawer({ open, onClose }) {
 
       clearCart();
       setOrderNote("");
+      setPaymentMethod("CASH");
       onClose();
       navigate("/orders");
     } catch (error) {
@@ -260,11 +263,86 @@ export default function CartDrawer({ open, onClose }) {
             className="border-t border-dashed pt-4"
             style={{ borderColor: RULE }}
           >
+            <fieldset>
+              <legend
+                className="mb-3 block text-xs font-bold uppercase tracking-[0.18em]"
+                style={{ color: `${INK}99` }}
+              >
+                Chọn phương thức thanh toán
+              </legend>
+
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  {
+                    value: "CASH",
+                    title: "Tiền mặt",
+                    subtitle: "Thanh toán khi nhận",
+                    icon: "💵",
+                  },
+                  {
+                    value: "BANK_TRANSFER",
+                    title: "Chuyển khoản",
+                    subtitle: "QR / Banking",
+                    icon: "🏦",
+                  },
+                ].map((method) => {
+                  const active = paymentMethod === method.value;
+
+                  return (
+                    <button
+                      key={method.value}
+                      type="button"
+                      onClick={() => setPaymentMethod(method.value)}
+                      className="relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-200 active:scale-[0.98]"
+                      style={{
+                        borderColor: active ? CHILI : RULE,
+                        background: active
+                          ? "linear-gradient(135deg,#FFF6F3,#FFE5DE)"
+                          : "#fff",
+                        boxShadow: active
+                          ? "0 10px 24px rgba(214,71,43,.12)"
+                          : "0 2px 8px rgba(0,0,0,.04)",
+                      }}
+                    >
+                      {/* check */}
+                      {active && (
+                        <div
+                          className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
+                          style={{ background: CHILI }}
+                        >
+                          ✓
+                        </div>
+                      )}
+
+                      <div className="text-3xl">{method.icon}</div>
+
+                      <div
+                        className="mt-3 font-bold"
+                        style={{
+                          color: active ? CHILI : INK,
+                          fontFamily: "'Space Grotesk', sans-serif",
+                        }}
+                      >
+                        {method.title}
+                      </div>
+
+                      <div
+                        className="mt-1 text-xs"
+                        style={{ color: `${INK}88` }}
+                      >
+                        {method.subtitle}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
+
             <label
-              className="mb-1.5 block text-xs font-bold uppercase tracking-wider"
+              className="mb-1.5 mt-4 block text-xs font-bold uppercase tracking-wider"
               style={{ color: `${INK}99` }}
             >
-              📝 Ghi chú cho quán
+              Ghi chú cho quán
             </label>
             <textarea
               rows={2}
@@ -288,7 +366,7 @@ export default function CartDrawer({ open, onClose }) {
               className="text-sm font-bold uppercase tracking-widest"
               style={{ color: INK }}
             >
-              Tổng cộng
+              Tổng cộng:
             </span>
             <span
               className="text-2xl font-bold tabular-nums"

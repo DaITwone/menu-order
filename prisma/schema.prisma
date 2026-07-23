@@ -7,13 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+}
+
 model Invoice {
-  id        String   @id @default(cuid())
-  code      String   @unique
-  note      String   @default("")
-  items     Json
-  total     Int
-  createdAt DateTime @default(now())
+  id            String        @id @default(cuid())
+  code          String        @unique
+  note          String        @default("")
+  items         Json
+  total         Int
+  paymentMethod PaymentMethod @default(CASH)
+  createdAt     DateTime      @default(now())
 
   @@index([createdAt])
 }

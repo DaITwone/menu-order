@@ -8,8 +8,11 @@ function toOrder(invoice) {
     note: invoice.note,
     items: invoice.items,
     total: invoice.total,
+    paymentMethod: invoice.paymentMethod,
   };
 }
+
+const PAYMENT_METHODS = new Set(["CASH", "BANK_TRANSFER"]);
 
 export default async function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
@@ -25,7 +28,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const body =
         typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-      const { note = "", items, total } = body;
+      const { note = "", items, total, paymentMethod = "CASH" } = body;
 
       if (!Array.isArray(items) || items.length === 0) {
         return res.status(400).json({ error: "Đơn hàng phải có sản phẩm." });
@@ -36,12 +39,17 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Tổng tiền không hợp lệ." });
       }
 
+      if (!PAYMENT_METHODS.has(paymentMethod)) {
+        return res.status(400).json({ error: "Phương thức thanh toán không hợp lệ." });
+      }
+
       const invoice = await prisma.invoice.create({
         data: {
           code: `HD${Date.now()}`,
           note: String(note).slice(0, 1000),
           items,
           total: numericTotal,
+          paymentMethod,
         },
       });
 

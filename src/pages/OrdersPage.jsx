@@ -10,6 +10,11 @@ const SAGE = "#7C8863";
 const RULE = "#DED2BE";
 const CANVAS = "#EFE8DA";
 
+const PAYMENT_METHOD_LABELS = {
+  CASH: "Tiền mặt",
+  BANK_TRANSFER: "Chuyển khoản",
+};
+
 const tornEdge = {
   height: "14px",
   width: "100%",
@@ -160,6 +165,18 @@ export default function OrdersPage() {
                       className="mt-4 border-t border-dashed"
                       style={{ borderColor: RULE }}
                     />
+
+                    <div className="flex items-center justify-between py-3 text-xs">
+                      <span
+                        className="font-bold uppercase tracking-wider"
+                        style={{ color: `${INK}99` }}
+                      >
+                        Thanh toán
+                      </span>
+                      <span className="font-bold" style={{ color: INK }}>
+                        {PAYMENT_METHOD_LABELS[order.paymentMethod] || "Tiền mặt"}
+                      </span>
+                    </div>
 
                     {/* Items */}
                     <div>
