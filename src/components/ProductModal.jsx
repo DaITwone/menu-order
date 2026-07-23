@@ -7,7 +7,7 @@ function ProductModalContent({ product, onClose }) {
   const defaultSize = hasSize ? Object.keys(product.sizes)[0] : null;
 
   const [size, setSize] = useState(defaultSize);
-  const [note, setNote] = useState("");
+  const [note] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   // Controls the slide-up / slide-down transition.

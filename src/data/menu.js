@@ -199,7 +199,7 @@ export const menu = [
     id: 21,
     name: "Sữa Chua Nha Đam",
     category: "yogurt",
-    image: "/images/tea/suachua-nhadam.jpg",
+    image: "/images/tea/suachuanhadam.jpg",
     price: 38000,
   },
 

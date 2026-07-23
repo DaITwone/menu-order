@@ -25,12 +25,32 @@ const tornEdgeFlipped = {
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   // Tracks which order is in "confirm delete" state — null when none.
   const [confirmingId, setConfirmingId] = useState(null);
 
   useEffect(() => {
-    const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    setOrders(savedOrders);
+    let active = true;
+
+    fetch("/api/orders")
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Không thể tải lịch sử đơn hàng.");
+        return response.json();
+      })
+      .then((savedOrders) => {
+        if (active) setOrders(savedOrders);
+      })
+      .catch((error) => {
+        if (active) setLoadError(error.message);
+      })
+      .finally(() => {
+        if (active) setIsLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const requestDelete = (orderId) => {
@@ -41,11 +61,18 @@ export default function OrdersPage() {
     setConfirmingId(null);
   };
 
-  const confirmDelete = (orderId) => {
-    const updated = orders.filter((o) => o.id !== orderId);
-    setOrders(updated);
-    localStorage.setItem("orders", JSON.stringify(updated));
-    setConfirmingId(null);
+  const confirmDelete = async (orderId) => {
+    try {
+      const response = await fetch(`/api/orders?id=${encodeURIComponent(orderId)}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Không thể xóa hóa đơn.");
+      setOrders((current) => current.filter((order) => order.id !== orderId));
+      setConfirmingId(null);
+    } catch (error) {
+      setLoadError(error.message);
+      setConfirmingId(null);
+    }
   };
 
   return (
@@ -74,7 +101,15 @@ export default function OrdersPage() {
       </header>
 
       <div className="mx-auto max-w-3xl px-4 py-6 sm:py-10">
-        {orders.length === 0 ? (
+        {isLoading ? (
+          <div className="py-16 text-center text-sm" style={{ color: `${INK}99` }}>
+            Đang tải hóa đơn...
+          </div>
+        ) : loadError ? (
+          <div className="py-16 text-center text-sm text-red-700" role="alert">
+            {loadError}
+          </div>
+        ) : orders.length === 0 ? (
           <div
             className="flex flex-col items-center rounded-2xl border border-dashed py-16 text-center"
             style={{ borderColor: RULE, background: PAPER }}

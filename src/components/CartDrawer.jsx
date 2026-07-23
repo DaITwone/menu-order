@@ -17,6 +17,8 @@ export default function CartDrawer({ open, onClose }) {
     useCart();
   const navigate = useNavigate();
   const [orderNote, setOrderNote] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
@@ -28,29 +30,38 @@ export default function CartDrawer({ open, onClose }) {
 
   if (!open) return null;
 
-  const createOrder = () => {
+  const createOrder = async () => {
     if (cart.length === 0) return;
 
-    const order = {
-      id: Date.now(),
-      code: `HD${Date.now()}`,
-      createdAt: new Date().toLocaleString("vi-VN"),
-      note: orderNote,
-      items: cart,
-      total: totalPrice,
-    };
+    setIsSubmitting(true);
+    setSubmitError("");
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ note: orderNote, items: cart, total: totalPrice }),
+      });
 
-    orders.unshift(order);
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(
+          result.error ||
+            (response.status === 404
+              ? "Không tìm thấy API. Hãy chạy bằng vercel dev hoặc deploy lại Vercel."
+              : "Không thể lưu hóa đơn."),
+        );
+      }
 
-    localStorage.setItem("orders", JSON.stringify(orders));
-
-    clearCart();
-
-    onClose();
-
-    navigate("/orders");
+      clearCart();
+      setOrderNote("");
+      onClose();
+      navigate("/orders");
+    } catch (error) {
+      setSubmitError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -266,18 +277,24 @@ export default function CartDrawer({ open, onClose }) {
             </span>
           </div>
 
+          {submitError && (
+            <p className="mb-3 text-sm text-red-700" role="alert">
+              {submitError}
+            </p>
+          )}
+
           {/* Ticket-stub button: circular notches punched at both ends */}
           <div className="relative mt-4">
             <button
               onClick={createOrder}
-              disabled={cart.length === 0}
+              disabled={cart.length === 0 || isSubmitting}
               className="w-full rounded-xl py-4 text-base font-bold uppercase tracking-widest text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
               style={{
                 background: CHILI,
                 fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
-              Tạo đơn
+              {isSubmitting ? "Đang lưu..." : "Tạo đơn"}
             </button>
             <span
               className="absolute -left-2.25 top-1/2 h-4.5 w-4.5 -translate-y-1/2 rounded-full"
