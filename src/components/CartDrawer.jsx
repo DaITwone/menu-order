@@ -252,7 +252,9 @@ export default function CartDrawer({ open, onClose }) {
         {/* Footer */}
         <div
           className="shrink-0 px-5 pt-4"
-          style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
+          style={{
+            paddingBottom: "calc(env(safe-area-inset-bottom) + 16px)",
+          }}
         >
           <div
             className="border-t border-dashed pt-4"
@@ -271,7 +273,12 @@ export default function CartDrawer({ open, onClose }) {
               placeholder="Gọi trước khi giao, không lấy muỗng..."
               className="w-full resize-none rounded-xl border p-3 text-sm outline-none transition"
               style={{ borderColor: RULE, background: "#fff" }}
-              onFocus={(e) => (e.target.style.borderColor = MUSTARD)}
+              onFocus={(e) => {
+                e.target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }}
               onBlur={(e) => (e.target.style.borderColor = RULE)}
             />
           </div>
