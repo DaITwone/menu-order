@@ -240,7 +240,7 @@ export const menu = [
     id: 25,
     name: "Trà Dưa Hấu Ổi Hồng",
     category: "tea",
-    image: "/images/tea/duahau-oihong.jpg",
+    image: "/images/tea/dhoh.png",
     sizes: {
       M: 41000,
       L: 46000,

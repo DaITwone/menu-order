@@ -77,7 +77,7 @@ export default function CartDrawer({ open, onClose }) {
         className="
     relative
     flex
-    h-dvh
+    h-full
     w-full
     flex-col
     overflow-hidden
