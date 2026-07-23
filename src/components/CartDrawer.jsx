@@ -40,7 +40,11 @@ export default function CartDrawer({ open, onClose }) {
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ note: orderNote, items: cart, total: totalPrice }),
+        body: JSON.stringify({
+          note: orderNote,
+          items: cart,
+          total: totalPrice,
+        }),
       });
 
       if (!response.ok) {
@@ -99,12 +103,24 @@ export default function CartDrawer({ open, onClose }) {
         {/* Header */}
         <div className="flex shrink-0 items-center justify-between px-5 pb-4 pt-2 sm:pt-6">
           <div className="flex items-center gap-2.5">
-            <h2
-              className="text-xl font-bold uppercase tracking-wide sm:text-2xl"
-              style={{ color: INK, fontFamily: "'Space Grotesk', sans-serif" }}
+            <button
+              onClick={() => {
+                onClose();
+                navigate("/orders");
+              }}
+              className="transition hover:opacity-70"
             >
-              🧾 Đơn của bạn
-            </h2>
+              <h2
+                className="text-xl font-bold uppercase tracking-wide sm:text-2xl"
+                style={{
+                  color: INK,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
+                🧾 Đơn của bạn
+              </h2>
+            </button>
+
             {cart.length > 0 && (
               <span
                 className="flex h-6 min-w-6 -rotate-6 items-center justify-center rounded-full px-1.5 text-xs font-bold"
@@ -260,9 +276,7 @@ export default function CartDrawer({ open, onClose }) {
             />
           </div>
 
-          <div
-            className="mt-4 flex items-center justify-between py-3"
-          >
+          <div className="mt-4 flex items-center justify-between py-3">
             <span
               className="text-sm font-bold uppercase tracking-widest"
               style={{ color: INK }}

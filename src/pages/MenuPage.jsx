@@ -37,6 +37,7 @@ export default function MenuPage() {
         open={cartOpen}
         onClose={() => setCartOpen(false)}
       />
+      
     </div>
   );
 }
