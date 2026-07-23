@@ -36,7 +36,7 @@ export const menu = [
     id: 4,
     name: "CF Tiramisu Jelly",
     category: "coffee",
-    image: "/images/coffee/tiramisu-jelly.jpg",
+    image: "/images/coffee/tiramisu.jpg",
     sizes: {
       M: 40000,
       L: 44000,
@@ -56,7 +56,7 @@ export const menu = [
     id: 6,
     name: "CF Caramel Macchiato",
     category: "coffee",
-    image: "/images/coffee/caramel-macchiato.jpg",
+    image: "/images/coffee/caramelmacchiato.jpg",
     sizes: {
       M: 43000,
       L: 47000,
@@ -66,7 +66,7 @@ export const menu = [
     id: 7,
     name: "Cà Phê Dừa Creamy",
     category: "coffee",
-    image: "/images/coffee/dua-creamy.jpg",
+    image: "/images/coffee/duacreamy.jpg",
     sizes: {
       M: 43000,
       L: 47000,
@@ -100,7 +100,7 @@ export const menu = [
     id: 10,
     name: "Cappuccino",
     category: "coffee",
-    image: "/images/coffee/cappuccino.jpg",
+    image: "/images/coffee/cappuchino.jpg",
     sizes: {
       M: 37000,
       L: 43000,
@@ -140,7 +140,7 @@ export const menu = [
     id: 14,
     name: "Caramel Latte",
     category: "coffee",
-    image: "/images/coffee/caramel-latte.jpg",
+    image: "/images/coffee/caramellatte.jpg",
     sizes: {
       M: 37000,
       L: 43000,
@@ -163,29 +163,29 @@ export const menu = [
   {
     id: 16,
     name: "Cà Phê Socola Đá Xay",
-    category: "blended",
-    image: "/images/blended/caphe-socola.jpg",
+    category: "coffee",
+    image: "/images/coffee/caphesocola.jpg",
     price: 48000,
   },
   {
     id: 17,
     name: "Cà Phê Dừa Đá Xay",
-    category: "blended",
-    image: "/images/blended/caphe-dua.jpg",
+    category: "coffee",
+    image: "/images/coffee/caphedua.jpg",
     price: 43000,
   },
   {
     id: 18,
     name: "Matcha Đá Xay",
-    category: "blended",
+    category: "coffee",
     image: "/images/special/matcha.jpg",
     price: 48000,
   },
   {
     id: 19,
     name: "Chanh Tuyết Hoa Hồng",
-    category: "blended",
-    image: "/images/blended/chanh-tuyet.jpg",
+    category: "coffee",
+    image: "/images/special/chanhtuyet.jpg",
     price: 43000,
   },
   {
@@ -322,9 +322,9 @@ export const menu = [
   },
   {
     id: 33,
-    name: "Trà Sữa Oolong Rang",
+    name: "Trà Sữa Oolong",
     category: "milktea",
-    image: "/images/milktea/oolong.jpg",
+    image: "/images/milktea/olong.jpg",
     sizes: {
       M: 37000,
       L: 42000,
@@ -358,7 +358,7 @@ export const menu = [
     id: 36,
     name: "Matcha Sữa Dừa",
     category: "special",
-    image: "/images/special/matcha-dua.jpg",
+    image: "/images/special/matchadua.jpg",
     sizes: {
       M: 40000,
       L: 46000,
