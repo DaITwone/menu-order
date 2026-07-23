@@ -184,21 +184,21 @@ export const menu = [
   {
     id: 19,
     name: "Chanh Tuyết Hoa Hồng",
-    category: "tea",
+    category: "tea",  
     image: "/images/special/ct.png",
     price: 43000,
   },
   {
     id: 20,
     name: "Sữa Chua Trân Châu",
-    category: "yogurt",
+    category: "milktea",
     image: "/images/tea/suachua-tranchau.jpg",
     price: 38000,
   },
   {
     id: 21,
     name: "Sữa Chua Nha Đam",
-    category: "yogurt",
+    category: "milktea",
     image: "/images/tea/suachuanhadam.jpg",
     price: 38000,
   },
@@ -347,7 +347,7 @@ export const menu = [
   {
     id: 35,
     name: "Matcha Latte",
-    category: "special",
+    category: "tea",
     image: "/images/special/matchalatte.jpg",
     sizes: {
       M: 37000,
@@ -357,7 +357,7 @@ export const menu = [
   {
     id: 36,
     name: "Matcha Sữa Dừa",
-    category: "special",
+    category: "tea",
     image: "/images/special/matchadua.png",
     sizes: {
       M: 40000,
@@ -367,7 +367,7 @@ export const menu = [
   {
     id: 37,
     name: "Sương Mai Giải Nhiệt",
-    category: "special",
+    category: "tea",
     image: "/images/tea/sm.png",
     sizes: {
       M: 28000,
@@ -377,7 +377,7 @@ export const menu = [
   {
     id: 38,
     name: "Ca Cao Muối",
-    category: "special",
+    category: "coffee",
     image: "/images/special/cc.png",
     sizes: {
       M: 37000,

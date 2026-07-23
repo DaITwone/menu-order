@@ -13,7 +13,7 @@ const SAGE = "#7C8863";
 const RULE = "#DED2BE";
 
 export default function CartDrawer({ open, onClose }) {
-  const { cart, totalPrice, increase, decrease, removeItem, clearCart } =
+  const { cart, totalPrice, increase, decrease, clearCart } =
     useCart();
   const navigate = useNavigate();
   const [orderNote, setOrderNote] = useState("");

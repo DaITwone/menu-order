@@ -45,7 +45,6 @@ function ProductModalContent({ product, onClose }) {
         }`}
         style={{ maxHeight: "92vh" }}
       >
-
         <div className="relative bg-gradient-to-b from-yellow-50 to-white">
           <button
             onClick={handleClose}
@@ -73,13 +72,24 @@ function ProductModalContent({ product, onClose }) {
                   <button
                     key={key}
                     onClick={() => setSize(key)}
-                    className={`flex-1 rounded-2xl border-2 p-3.5 text-center transition active:scale-95 ${
+                    className={`relative flex-1 rounded-2xl border-2 p-3.5 text-center transition-all active:scale-95 ${
                       size === key
-                        ? "border-yellow-500 bg-yellow-50"
-                        : "border-gray-200 hover:border-yellow-300"
+                        ? "border-yellow-500 bg-yellow-50 shadow-sm"
+                        : "border-gray-100 bg-gray-50/50 hover:border-yellow-200"
                     }`}
                   >
-                    <div className="text-base font-bold">{key}</div>
+                    {size === key && (
+                      <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-500 text-[11px] font-bold text-white shadow">
+                        ✓
+                      </span>
+                    )}
+                    <div
+                      className={`text-base font-bold ${
+                        size === key ? "text-yellow-700" : "text-gray-700"
+                      }`}
+                    >
+                      {key}
+                    </div>
                     <div className="mt-1 text-sm text-gray-500">
                       {formatPrice(value)}
                     </div>
@@ -113,11 +123,14 @@ function ProductModalContent({ product, onClose }) {
 
         {/* Sticky footer with safe-area padding for iOS home indicator */}
         <div
-          className="border-t border-gray-100 bg-white p-4"
-          style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+          className="bg-white p-4"
+          style={{
+            borderTop: "1.5px",
+            paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
+          }}
         >
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-[15px] font-semibold text-gray-500">
+            <span className="font-semibold text-gray-700">
               Tổng cộng:
             </span>
             <span className="text-2xl font-bold text-yellow-600">
@@ -148,7 +161,7 @@ function ProductModalContent({ product, onClose }) {
               }}
               className="flex-1 rounded-xl bg-yellow-500 py-3.5 font-bold text-white shadow-sm transition active:scale-95 active:bg-yellow-600"
             >
-              Thêm vào giỏ
+              Thêm món
             </button>
           </div>
         </div>
