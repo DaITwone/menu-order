@@ -347,7 +347,7 @@ export const menu = [
   {
     id: 35,
     name: "Matcha Latte",
-    category: "tea",
+    category: "coffee",
     image: "/images/special/matchalatte.jpg",
     sizes: {
       M: 37000,
@@ -357,7 +357,7 @@ export const menu = [
   {
     id: 36,
     name: "Matcha Sữa Dừa",
-    category: "tea",
+    category: "coffee",
     image: "/images/special/matchadua.png",
     sizes: {
       M: 40000,
