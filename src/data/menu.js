@@ -304,7 +304,7 @@ export const menu = [
     id: 31,
     name: "Trà Sữa Truyền Thống",
     category: "milktea",
-    image: "/images/milktea/ts.jpg",
+    image: "/images/milktea/ts.png",
     sizes: {
       M: 37000,
       L: 42000,
